@@ -5,8 +5,8 @@ import java.util.Random;
  */
 public class Screen {
 
-    private int height = 20;
-    private int width = 20;
+    private int height = 5;
+    private int width = 5;
     private Tile tiles[][];
 
 
@@ -15,9 +15,7 @@ public class Screen {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 tiles[i][j] = new Tile();
-                System.out.print(tiles[i][j].getLabelToDisplay(false));
             }
-            System.out.print("\n");
         }
     }
 

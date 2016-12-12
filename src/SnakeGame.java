@@ -13,13 +13,12 @@ public class SnakeGame {
 
         screen.redraw(snake);
 
-
-
-
         System.out.print("Enter something:");
         while(true) {
+            System.out.print("\n ---- \n");
             Scanner scanner = new Scanner(System.in);
-            String name = scanner.nextLine();
+            String movement = scanner.nextLine();
+            snake.move(movement);
             screen.redraw(snake);
         }
     }

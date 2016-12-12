@@ -22,7 +22,9 @@ public class SnakeGame {
             snake.move(movement);
 
 
-            screen.redraw(snake);
+            if(!screen.redraw(snake)) {
+                break;
+            }
         }
     }
 }

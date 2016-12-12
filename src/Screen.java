@@ -5,24 +5,24 @@ import java.util.Random;
  */
 public class Screen {
 
-    private int height = 5;
-    private int width = 5;
+    private static final int HEIGHT = 5;
+    private static final int WIDTH = 5;
     private Tile tiles[][];
     public int score = 0;
-
+    
 
     public void initialize() {
-        this.tiles = new Tile[height][width];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        this.tiles = new Tile[HEIGHT][WIDTH];
+        for (int i = 0; i < HEIGHT; i++) {
+            for (int j = 0; j < WIDTH; j++) {
                 tiles[i][j] = new Tile();
             }
         }
     }
 
     boolean isSnakeColide(Snake snake){
-        return  (snake.positions[0].x < 0 || snake.positions[0].x >= width) ||
-                (snake.positions[0].y < 0 || snake.positions[0].y >= height);
+        return  (snake.positions[0].x < 0 || snake.positions[0].x >= WIDTH) ||
+                (snake.positions[0].y < 0 || snake.positions[0].y >= HEIGHT);
     }
 
     boolean isSnakeAteApple(Snake snake, Tile tile) {
@@ -41,8 +41,8 @@ public class Screen {
         boolean ateApple = false;
 
         if(!this.isSnakeColide(snake)) {
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
+            for (int i = 0; i < HEIGHT; i++) {
+                for (int j = 0; j < WIDTH; j++) {
                     for (int k = 0; k < snake.positions.length; k++) {
                         if(snake.positions[k].getX() == j && snake.positions[k].getY() == i) {
                             isSnakeBody = true;
@@ -74,8 +74,8 @@ public class Screen {
 
     public void setApple() {
         Random randomGenerator = new Random();
-        int x = randomGenerator.nextInt(this.width);
-        int y = randomGenerator.nextInt(this.height);
+        int x = randomGenerator.nextInt(this.WIDTH);
+        int y = randomGenerator.nextInt(this.HEIGHT);
         this.tiles[x][y].hasApple = true;
     }
 

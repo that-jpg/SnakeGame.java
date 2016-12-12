@@ -18,7 +18,7 @@ public class SnakeGame {
 
         screen.redraw(snake);
 
-        System.out.print("Enter something:");
+        System.out.print("Enter the next movement:");
         while(true) {
             System.out.print("\n ---- \n");
             Scanner scanner = new Scanner(System.in);

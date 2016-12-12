@@ -3,30 +3,23 @@
  */
 public class Snake {
 
-    public int size;
+    private int size;
     public Position[] positions;
 
     /*
      * Draw the snake
      */
     public Snake(){
+        this.setSize(1);
         positions = new Position[1];
         positions[0] = new Position();
         positions[0].setX(2);
         positions[0].setY(2);
     }
 
-//    public void move(String movement) {
-//        if (movement.equals("up")) {
-//            this.positions[0].setY(this.positions[0].getY() - 1);
-//        } else if (movement.equals("down")) {
-//            this.positions[0].setY(this.positions[0].getY() + 1);
-//        } else if (movement.equals("left")) {
-//            this.positions[0].setX(this.positions[0].getX() - 1);
-//        } else if (movement.equals("right")) {
-//            this.positions[0].setX(this.positions[0].getX() + 1);
-//        }
-//    }
+    public void increaseSize() {
+        this.setSize(this.getSize() + 1);
+    }
 
     public void moveUp(){
         this.positions[0].setY(this.positions[0].getY() - 1);
@@ -42,5 +35,13 @@ public class Snake {
 
     public void moveRight(){
         this.positions[0].setX(this.positions[0].getX() + 1);
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 }

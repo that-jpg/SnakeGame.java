@@ -18,7 +18,10 @@ public class SnakeGame {
             System.out.print("\n ---- \n");
             Scanner scanner = new Scanner(System.in);
             String movement = scanner.nextLine();
+
             snake.move(movement);
+
+
             screen.redraw(snake);
         }
     }

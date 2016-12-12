@@ -19,21 +19,34 @@ public class Screen {
         }
     }
 
+    private boolean isSnakeColide(Snake snake){
+        return  (snake.positions[0].x < 0 || snake.positions[0].x >= width) ||
+                (snake.positions[0].y < 0 || snake.positions[0].y >= height);
+    }
+
+
     public void redraw(Snake snake){
         System.out.flush();
         boolean isSnakeBody = false;
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                for (int k = 0; k < snake.positions.length; k++) {
-                    if(snake.positions[k].getX() == j && snake.positions[k].getY() == i) {
-                        isSnakeBody = true;
+
+        if(!this.isSnakeColide(snake)) {
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    for (int k = 0; k < snake.positions.length; k++) {
+                        if(snake.positions[k].getX() == j && snake.positions[k].getY() == i) {
+                            isSnakeBody = true;
+                        }
                     }
+                    System.out.print(tiles[i][j].getLabelToDisplay(isSnakeBody));
+                    isSnakeBody = false;
                 }
-                System.out.print(tiles[i][j].getLabelToDisplay(isSnakeBody));
-                isSnakeBody = false;
+                System.out.print("\n");
             }
-            System.out.print("\n");
+        } else {
+            System.out.println("--------- GAME OVER ---------");
         }
+
+
     }
 
 

@@ -7,13 +7,20 @@ public class SnakeGame {
     public static void main(String[] args) {
         Screen screen = new Screen();
         screen.initialize();
+
         screen.setApple();
-        screen.redraw();
+        Snake snake = new Snake();
+
+        screen.redraw(snake);
+
+
+
+
         System.out.print("Enter something:");
         while(true) {
             Scanner scanner = new Scanner(System.in);
             String name = scanner.nextLine();
-            screen.redraw();
+            screen.redraw(snake);
         }
     }
 }

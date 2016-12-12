@@ -9,22 +9,30 @@ public class Screen {
     private int width = 20;
     private Tile tiles[][];
 
+
     public void initialize() {
         this.tiles = new Tile[height][width];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 tiles[i][j] = new Tile();
-                System.out.print(tiles[i][j].getLabelToDisplay());
+                System.out.print(tiles[i][j].getLabelToDisplay(false));
             }
             System.out.print("\n");
         }
     }
 
-    public void redraw(){
+    public void redraw(Snake snake){
         System.out.flush();
+        boolean isSnakeBody = false;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                System.out.print(tiles[i][j].getLabelToDisplay());
+                for (int k = 0; k < snake.positions.length; k++) {
+                    if(snake.positions[k].getX() == j && snake.positions[k].getY() == i) {
+                        isSnakeBody = true;
+                    }
+                }
+                System.out.print(tiles[i][j].getLabelToDisplay(isSnakeBody));
+                isSnakeBody = false;
             }
             System.out.print("\n");
         }

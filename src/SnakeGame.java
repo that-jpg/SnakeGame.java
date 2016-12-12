@@ -4,12 +4,17 @@ import java.util.Scanner;
  * Created by vntjomg on 12/12/16.
  */
 public class SnakeGame {
-    public static void main(String[] args) {
-        Screen screen = new Screen();
-        screen.initialize();
 
-        screen.setApple();
+
+    public static void main(String[] args) {
+        final int HEIGHT = 5;
+        final int WIDTH = 5;
+
         Snake snake = new Snake();
+        Apple apple = new Apple(HEIGHT, WIDTH);
+
+        Screen screen = new Screen(snake, apple, HEIGHT, WIDTH);
+
 
         screen.redraw(snake);
 
@@ -19,8 +24,7 @@ public class SnakeGame {
             Scanner scanner = new Scanner(System.in);
             String movement = scanner.nextLine();
 
-            snake.move(movement);
-
+            screen.moveSnake(movement);
 
             if(!screen.redraw(snake)) {
                 break;

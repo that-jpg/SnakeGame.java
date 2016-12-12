@@ -2,55 +2,36 @@
  * Created by vntjomg on 12/12/16.
  */
 public class Tile {
-    public boolean hasApple = false;
-    public boolean hasSnakeBody = false;
+    private boolean apple = false;
+    private boolean snakeBody = false;
 
+    final private String LABEL = "[ ]";
+    private String LABEL_WITH_SNAKE_BODY= "[@]";
+    private String LABEL_WITH_APPLE = "[#]";
 
-
-    private String label;
-    private String labelWithSnakeBody;
-    private String labelWithApple;
-
-    public Tile() {
-        this.setLabel("[ ]");
-        this.setLabelWithApple("[#]");
-        this.setLabelWithSnakeBody("[@]");
-    }
-
-    public String getLabelToDisplay(boolean isSnakeBody){
-        if(isSnakeBody) {
-            return this.getLabelWithSnakeBody();
+    public void printTile() {
+        if (this.hasApple()) {
+            System.out.print(this.LABEL_WITH_APPLE);
+        } else if(this.isSnakeBody()){
+            System.out.print(this.LABEL_WITH_SNAKE_BODY);
+        } else {
+            System.out.print(this.LABEL);
         }
-
-        if(this.hasApple) {
-            return this.getLabelWithApple();
-        }
-
-        return this.getLabel();
-
     }
 
-    public String getLabel() {
-        return label;
+    public boolean hasApple() {
+        return apple;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setApple(boolean apple) {
+        this.apple = apple;
     }
 
-    public String getLabelWithApple() {
-        return labelWithApple;
+    public boolean isSnakeBody() {
+        return snakeBody;
     }
 
-    public void setLabelWithApple(String setLabelWithApple) {
-        this.labelWithApple = setLabelWithApple;
-    }
-
-    public String getLabelWithSnakeBody() {
-        return labelWithSnakeBody;
-    }
-
-    public void setLabelWithSnakeBody(String labelWithSnakeBody) {
-        this.labelWithSnakeBody = labelWithSnakeBody;
+    public void setSnakeBody(boolean snakeBody) {
+        this.snakeBody = snakeBody;
     }
 }

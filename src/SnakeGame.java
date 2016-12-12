@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Created by vntjomg on 12/12/16.
  */
@@ -7,5 +9,11 @@ public class SnakeGame {
         screen.initialize();
         screen.setApple();
         screen.redraw();
+        System.out.print("Enter something:");
+        while(true) {
+            Scanner scanner = new Scanner(System.in);
+            String name = scanner.nextLine();
+            screen.redraw();
+        }
     }
 }

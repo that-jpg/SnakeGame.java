@@ -24,11 +24,14 @@ public class SnakeGame {
             Scanner scanner = new Scanner(System.in);
             String movement = scanner.nextLine();
 
-            screen.moveSnake(movement);
-
-            if(!screen.redraw(snake)) {
+            if(!screen.moveSnake(movement)) {
                 break;
             }
+
+            screen.redraw(snake);
         }
+        System.out.println("--------- GAME OVER ---------");
+        System.out.println("Your final score is " + screen.score);
+
     }
 }

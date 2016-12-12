@@ -27,6 +27,12 @@ public class Screen {
         this.tiles[apple.getPosition().getX()][apple.getPosition().getY()].setApple(true);
     }
 
+    private void setApplePosition() {
+        this.tiles[this.getApple().getPosition().getX()][this.getApple().getPosition().getY()].setApple(false);
+        this.getApple().newApple(this.getWidth(), this.getHeight());
+        this.tiles[this.getApple().getPosition().getX()][this.getApple().getPosition().getY()].setApple(true);
+    }
+
     private void setSnakePosition(Snake snake) {
         this.tiles[snake.positions[0].getX()][snake.positions[0].getY()].setSnakeBody(true);
     }
@@ -40,9 +46,15 @@ public class Screen {
         }
     }
 
-    public void moveSnake(String movement)  {
+    private boolean isSamePosition(Position a, Position b) {
+        return (a.getX() == b.getX()) && (a.getY() == b.getY());
+    }
+
+    public boolean moveSnake(String movement)  {
         this.tiles[this.getSnake().positions[0].getX()][this.getSnake().positions[0].getY()].setSnakeBody(false);
         // Reset the current tile of the snake
+
+
         if (movement.equals("up")) {
             this.getSnake().moveUp();
         } else if (movement.equals("down")) {
@@ -52,23 +64,27 @@ public class Screen {
         } else if (movement.equals("right")) {
             this.getSnake().moveRight();
         }
-        // Set the new tile to be the body
+        // if the snake is coliding with something stop the process
+        if (this.isSnakeColide()){
+            return false;
+        }
+
         this.setSnakePosition(this.getSnake());
+        return true;
     }
 
 
-    boolean isSnakeColide(Snake snake){
-//        return  (snake.positions[0].getX() < 0 || snake.positions[0].getX() >= this.getWidth()) ||
-//                (snake.positions[0].getY() < 0 || snake.positions[0].getY() >= this.getHeight());
-        return false;
+    boolean isSnakeColide(){
+        return  (this.getSnake().positions[0].getX() < 0 || this.getSnake().positions[0].getX() >= this.getWidth()) ||
+                (this.getSnake().positions[0].getY() < 0 || this.getSnake().positions[0].getY() >= this.getHeight());
     }
 
-    boolean isSnakeAteApple(Snake snake, Tile tile) {
-//        if(tile.hasApple) {
-//            tile.hasApple = false;
-//            this.score += 1;
-//            return true;
-//        }
+    boolean isSnakeAteApple() {
+        if(this.isSamePosition(this.getApple().getPosition(), this.getSnake().positions[0])) {
+            this.setApplePosition();
+            this.score += 1;
+            return true;
+        }
         return false;
     }
 
@@ -76,32 +92,26 @@ public class Screen {
         return true;
     }
 
-    public boolean redraw(Snake snake){
-        System.out.flush();
-        boolean isSnakeBody = false;
+    public void redraw(Snake snake){
+
         boolean ateApple = false;
 
-        if(!this.isSnakeColide(snake)) {
-            for (int i = 0; i < this.getHeight(); i++) {
-                for (int j = 0; j < this.getWidth(); j++) {
-                    if(this.isSnakeBody(this.getSnake(), getTiles()[i][j])) {
-                        getTiles()[j][i].printTile();
+        for (int i = 0; i < this.getHeight(); i++) {
+            for (int j = 0; j < this.getWidth(); j++) {
+                if(this.isSnakeBody(this.getSnake(), this.getTiles()[i][j])) {
+                    this.getTiles()[j][i].printTile();
+                    if(this.isSnakeAteApple()) {
+                        ateApple = true;
                     }
                 }
-
-                System.out.print("\n");
             }
-        } else {
-            System.out.println("--------- GAME OVER ---------");
-            System.out.println("Your final score is " + score);
-            return false;
+            System.out.print("\n");
         }
-
         if(ateApple) {
             System.out.println("You got a apple - Score: " + score);
         }
 
-        return true;
+
     }
 
     public int getHeight() {
